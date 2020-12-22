@@ -4,7 +4,7 @@ from empath import Empath
 
 
 
-st.title("Sentiment Analysis Demo")
+st.title("Sentiment Analysis Demo - for Keren")
 input = st.text_input("Your sentence:","Write a sentence here")
 
 lexicon = Empath()
