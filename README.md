@@ -413,3 +413,50 @@ sentence_embedding = sister.MeanEmbedding(lang="en")
 sentence = "I am a dog."
 vector = sentence_embedding(sentence)
 ```
+
+# Keras
+
+
+## Sequencial Model
+
+```python
+import tensorflow as tf
+from tensorflow import keras
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import Dense
+from tensorflow.keras.layers import Dropout
+from tensorflow.keras import layers
+from sklearn.model_selection import train_test_split
+import numpy
+seed = 7
+numpy.random.seed(seed)
+
+
+X = np.array([800, 720, 690, 250, 450, 325, 725, 777, 444, 692 , 300])
+y = np.array([1,   1,   1,   0,   0,   0,   1,   1,   0,   1,    0  ])
+
+
+model = tf.keras.Sequential()
+model.add(tf.keras.layers.Dense(400, input_dim=1, activation='relu'))
+model.add(tf.keras.layers.Dense(500, activation='relu'))
+model.add(tf.keras.layers.Dense(20, activation='relu'))
+model.add(tf.keras.layers.Dense(1, activation='sigmoid'))
+
+model.compile(loss='binary_crossentropy',
+              optimizer='adam',
+              metrics=['accuracy', tf.keras.metrics.AUC()]
+             )
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.20, random_state=seed)
+res = model.fit(X_train, y_train, epochs=100, batch_size=50, validation_split=0.1)
+
+
+```
+
+```python
+for key in res.history:
+    print(f"validation_{key}:\t\t{res.history[key][-1:][0]}")
+    
+_, accuracy, auc = model.evaluate(X_test, y_test)
+print(f"test_accuracy:\t\t\t{accuracy}")
+print(f"test_auc:\t\t\t{auc}")
+```
