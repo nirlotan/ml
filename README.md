@@ -331,13 +331,16 @@ import mlflow
 # set mlflow environment for tracking experiments
 mlflow.set_tracking_uri("/Users/nlotan/mlruns/")
 
+
+exp_name = "Fizz Experiment"
+
 try:
     # only the first time of running this experiment
-    exp = mlflow.create_experiment("Fizz Experiment")
+    exp = mlflow.create_experiment(exp_name)
+    mlflow.start_run(experiment_id=exp)
 except:
     #experiment already exists, Assume the experiment number (taken from MLFlow UI)
-    exp = 1
-mlflow.start_run(experiment_id=exp)
+    mlflow.set_experiment(exp_name)
 
 Value = 7
 mlflow.log_param("Name", Value)
