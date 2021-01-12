@@ -417,6 +417,27 @@ sentence = "I am a dog."
 vector = sentence_embedding(sentence)
 ```
 
+# REST API
+Example of the most basic REST API
+
+```python
+from flask import Flask
+from flask import request
+
+app = Flask(__name__)
+
+@app.route('/hello/', methods=['GET', 'POST'])
+def welcome():
+    
+    
+    page = request.args.get('page', default = 1, type = int)
+    name = request.args.get('name', default = '*', type = str)
+    age = request.args.get('age', default = '*', type = str)
+    return f"Hello {name}, you are {age} years old! "
+    
+app.run(host='0.0.0.0', port=105)
+```
+
 # Keras
 
 
