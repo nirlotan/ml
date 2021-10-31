@@ -27,6 +27,8 @@ Use Jupytext extension in order to sync your notebook with a script or MD file f
 Use nbdiff to diff your notebook from a github notebook: https://github.com/jupyter/nbdime
 <!-- #endregion -->
 
+Use pipreqs to get the exact requirement list needed for your project: https://pypi.org/project/pipreqs/
+
 # Basic Python tricks
 
 
